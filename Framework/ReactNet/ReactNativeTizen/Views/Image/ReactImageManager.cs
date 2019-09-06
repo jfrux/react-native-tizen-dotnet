@@ -295,11 +295,7 @@ namespace ReactNative.Views.ReactImage
         {
             Log.Info(ReactConstants.Tag, "## Enter CreateViewInstance of Image ##");
 
-            var image = new Image(ReactProgram.RctWindow)
-            {
-                IsFixedAspect = true,
-                PrescaleSize = 1
-            };
+            var image = new Image(ReactProgram.RctWindow);
             image.Show();
 
             Log.Info(ReactConstants.Tag, "## Exit CreateViewInstance of Image ##");
