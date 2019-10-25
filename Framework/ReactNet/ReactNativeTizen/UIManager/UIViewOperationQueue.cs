@@ -16,14 +16,14 @@ namespace ReactNative.UIManager
     /// <summary>
     /// This class acts as a buffer for command executed on
     /// <see cref="NativeViewHierarchyManager"/>. It exposes similar methods as
-    /// mentioned classes but instead of executing commands immediately, it 
-    /// enqueues those operations in a queue that is then flushed from 
+    /// mentioned classes but instead of executing commands immediately, it
+    /// enqueues those operations in a queue that is then flushed from
     /// <see cref="UIManagerModule"/> once a JavaScript batch of UI operations
     /// is finished.
-    /// 
+    ///
     /// In Tizen, EFL not support frame callback or rendder callback.
     /// So, async calling operations dirrectly by EcoreMainloop.PostAndWakeUp
-    /// 
+    ///
     /// </summary>
     public class UIViewOperationQueue
     {
@@ -61,7 +61,7 @@ namespace ReactNative.UIManager
             {
                 return _nativeViewHierarchyManager;
             }
-        } 
+        }
 
         /// <summary>
         /// Checks if the operation queue is empty.
@@ -451,8 +451,8 @@ namespace ReactNative.UIManager
                 });
             }
 
-            //Runing batches async
-            EcoreLoopProxy.PostAndWakeUp(FlushPendingBatches);
+            //Running batches async
+            MainSynchronizationContext.Post(FlushPendingBatches);
         }
 
         private void EnqueueOperation(Action action)

@@ -1,9 +1,9 @@
 ﻿using System;
-using System.IO;
 using System.Collections.Generic;
+using System.Threading;
 using ReactNative.Modules.Core;
 
-using Tizen.Applications;                   // application life-cycle  
+using Tizen.Applications;                   // application life-cycle
 using ReactNativeTizen.ElmSharp.Extension;  // ui control
 
 using Tizen;                                // FOR debug log
@@ -18,7 +18,7 @@ namespace ReactNative
     /// </summary>
     public abstract class ReactProgram : CoreUIApplication
     {
-        private IReactInstanceManager _reactInstanceManager;   // ReactInstanceManger inst 
+        private IReactInstanceManager _reactInstanceManager;   // ReactInstanceManger inst
         //private LifecycleState mLifecycleState = LifecycleState.BeforeResume;
         public ReactRootView RootView { get; set; }                     // The root view managed by the page.
         public static string ResourceDir { get; private set; }          // ResourceDir here for extension (not bad)
@@ -69,6 +69,8 @@ namespace ReactNative
             }
             //Log.Info(ReactConstants.Tag, "## ReactProgram ##  Exit Constructor ReactProgram()");
 
+            MainSynchronizationContext.Initialize(SynchronizationContext.Current, Exit);
+
             Elementary.Initialize();
             Elementary.ThemeOverlay();
 
@@ -97,7 +99,7 @@ namespace ReactNative
             //RootView.Show();
 
 
-            // 3. Entry of 'JS' world 
+            // 3. Entry of 'JS' world
             RootView.StartReactApplication(_reactInstanceManager, MainComponentName);
 
             // 4. Set root view

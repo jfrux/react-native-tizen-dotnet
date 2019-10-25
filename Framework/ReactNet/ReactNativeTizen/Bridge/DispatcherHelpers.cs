@@ -19,14 +19,13 @@ namespace ReactNative.Bridge
 
         public static bool IsOnDispatcher()
         {
-            return EcoreMainloop.IsMainThread;
+            return MainSynchronizationContext.IsMainThread;
         }
 
         public static void RunOnDispatcher(Action action)
         {
             //Async call
-            EcoreLoopProxy.PostAndWakeUp(action);
-            //await new Task(action);   　// TODO: bind to the ecore main loop
+            MainSynchronizationContext.Post(action);
         }
 
         public static Task<T> CallOnDispatcher<T>(Func<T> func)

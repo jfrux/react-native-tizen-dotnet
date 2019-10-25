@@ -64,7 +64,7 @@ namespace ReactNative.DevSupport
             }
         }
 
-		//TODO: Use log to instead temporarily, 
+		//TODO: Use log to instead temporarily,
 		//need to decide whether to show these failures on error window
         public void HandleException(Exception exception)
         {
@@ -73,7 +73,7 @@ namespace ReactNative.DevSupport
             //  ExceptionDispatchInfo.Capture(exception).Throw();
             //}, DispatcherPriority.Send).Task.ConfigureAwait(false);
 			RNTracer.Error(ReactConstants.Tag, "[RN_EXCEPTION] DisabledDevSupportManager::HandleException:[" + exception.ToString() + "]");
-            EcoreLoopProxy.Quit();
+            MainSynchronizationContext.Quit();
         }
 
         public void HandleReloadJavaScript()
