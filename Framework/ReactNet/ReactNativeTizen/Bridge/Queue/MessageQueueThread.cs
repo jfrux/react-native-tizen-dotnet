@@ -1,16 +1,14 @@
-﻿using ReactNative.Common;
-using ReactNative.Tracing;
 using System;
 using System.Collections.Concurrent;
+using System.Diagnostics.CodeAnalysis;
 using System.Reactive;
-using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Threading;
 using System.Threading.Tasks;
-using static System.FormattableString;
-
-using ElmSharp;
+using ReactNative.Common;
+using ReactNative.Tracing;
 using ReactNativeTizen.ElmSharp.Extension;
+using static System.FormattableString;
 
 namespace ReactNative.Bridge.Queue
 {
@@ -145,7 +143,7 @@ namespace ReactNative.Bridge.Queue
 
             private IObserver<Action> _actionObserver;
 
-            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
+            [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
             public DispatcherMessageQueueThread(string name, Action<Exception> handler)
                 : base(name)
             {
@@ -153,14 +151,14 @@ namespace ReactNative.Bridge.Queue
                 _actionObserver = _actionSubject;
                 _subscription = _actionSubject
                     //Remove "ObserveOn"
-                    //TODO: Need to check whether it can works well. 
+                    //TODO: Need to check whether it can works well.
                     //.ObserveOn(Dispatcher.CurrentDispatcher)
                     .Subscribe(action =>
                     {
                         try
                         {
                             //Sync call
-                            EcoreLoopProxy.Send(action);
+                            MainSynchronizationContext.Send(action);
                         }
                         catch (Exception ex)
                         {
@@ -177,7 +175,7 @@ namespace ReactNative.Bridge.Queue
 
             protected override bool IsOnThreadCore()
             {
-                return EcoreLoopProxy.IsMainThread;
+                return MainSynchronizationContext.IsMainThread;
             }
 
             protected override void Dispose(bool disposing)
@@ -236,7 +234,7 @@ namespace ReactNative.Bridge.Queue
                 _queue.Dispose();
             }
 
-            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
+            [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
             private void Run()
             {
                 while (true)
