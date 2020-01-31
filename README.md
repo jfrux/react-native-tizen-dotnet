@@ -41,7 +41,7 @@ react-native-tizen-dotnet
 
 ## Connect to TV
 Refer to this website, **Enable Developer Mode on the TV**:  
-https://developer.samsung.com/tv/develop/getting-started/using-sdk/tv-device
+https://developer.samsung.com/SmartTV/develop/getting-started/using-sdk/tv-device.html
 
 ## Running in emulator
 react-native-tizen-dotnet depend on C++ libraries JSCore and yoga. And emulator has diffrent CPU Arch with TV device. So we provide diffrent C++ libraries(arm & i586).  
