@@ -8,8 +8,8 @@ Currently, react-native-tizen-dotnet based on [react-native 0.42](https://github
 
 ## Components & APIs Documents
 
-react-native-tizen-dotnet not realized all Components and APIs of react-native.  
-Detail reference to [docs](Docs/doc-index.md).
+`react-native-tizen-dotnet` may not support all React Native Components and APIs.  
+Review our [docs](Docs/doc-index.md) for information about currently supported Components and APIs.
 
 ## Source Code Directory Structure
 
@@ -53,18 +53,44 @@ Framework/ReactNet/yoga/libyoga_i586.so
 ```
 
 ## Debug
-`react-native-tizen-dotnet` support same debugging way with `react-naitve`. (likes
-`Hot Reloading`, `JS Remote Debugging` and others debugging way of ReactNative)
+
+`react-native-tizen-dotnet` supports the same familiar debugging tooling as `react-native` such as `Hot Reloading`, `JS Remote Debugging`.
 
 To enable debugging, you need follow these steps:
-1. Modify `package.json` in your app to config debug mode.
-   * Set `mode` of `config` as *Debug*(Default setting is *Release*)
-2. Launch debug server in your PC
+
+1. Modify the `package.json` file in your app.
+   
+   Set `config.mode` to *Debug* (Default setting is *Release*)
+   
+   ```js
+   // package.json
+   {
+     // ...
+     "config": {
+       // ...
+       "mode": "Debug"
+     },
+   // ...
+   }
+   ```
+   
+2. Launch the debug server on your local machine.
+   
    ``` shell
-   # Server will running with 8081 port
    npm run server
    ```
-3. Package your app and launch on TV(App will try to connect debug server automatically)
-4. Press `Red`/`A` key on remote controller to set debug items
-   * If your app can't connect to debug server, you can set host IP here
-     > If `input panel` is hard to use, suggest using real keybroad
+   
+   The server should now be running on port `8081`.
+   
+3. Package your app and launch on TV
+
+   - `yarn package`
+   - `yarn launch`
+   
+   *Note: Your app should launch and connect to debug server automatically.*
+   
+4. Use the TV Remote's `Red` or `A` button to configure debug settings.
+   
+   *Note: If your app can't connect to debug server, you can set host IP in this same manner.*
+   
+   *Note: If `input panel` is hard to use, suggest using real keybroad*
