@@ -1,12 +1,11 @@
 # react-native-tizen-dotnet
-React Native is an open source framework for building native apps with React.JS. It is supported in Android, iOS and Windows currently.
 
 **react-native-tizen-dotnet** is a React Native framework for developer to build Tizen.NET apps on Tizen.  
 It provides the same fundamental UI components and user experience with Tizen native Apps. Also it provides a easy and fast debugging way with Hot Module Reloading feature.
 
-Currently, react-native-tizen-dotnet based on [react-native 0.42](https://github.com/facebook/react-native/tree/0.42-stable) and [react-native-windows 0.42](https://github.com/Microsoft/react-native-windows/tree/0.42-stable).  
+`react-native-tizen-dotnet` is based on [react-native v0.42](https://github.com/facebook/react-native/tree/0.42-stable) and [react-native-windows v0.42](https://github.com/Microsoft/react-native-windows/tree/0.42-stable).  
 
-## Components & APIs Documents
+## Compatibility
 
 `react-native-tizen-dotnet` may not support all React Native Components and APIs.  
 Review our [docs](Docs/doc-index.md) for information about currently supported Components and APIs.
@@ -26,27 +25,41 @@ react-native-tizen-dotnet
 ![Framework](./Docs/img/Framework.PNG)
 
 ## Getting Started
-### Installing dependencies
+
+### Developer Dependencies
 -  [Node.js](https://nodejs.org/en/download/)
 -  [.NET Core SDK](https://dotnet.microsoft.com/download)
-### Steps(Ubuntu env. as example)
--   $ ```sudo npm i -g create-react-native-tizen-app```
--   $ ```create-react-native-tizen-app myTizenApp```
--   $ ```cd myTizenApp```
--   $ ```vim package.json``` //change "tvip": "192.168.100.1" to your Tv IP
--   $ ```yarn bundle``` // for release mode (npm run bundle)
--   $ ```yarn bundle --dev``` // for dev mode, js file not ugly (npm run bundle --dev)
--   $ ```yarn package``` // packaging tpk for Tizen (npm run package)
--   $ ```yarn launch``` // launch tpk to Tizen TV , Before launch you [Enable Developer Mode on the TV](#Connect-to-TV) to TV) first (npm run launch)
+
+### Install
+
+`sudo npm i -g create-react-native-tizen-app`
+
+### Usage
+
+-  `create-react-native-tizen-app myTizenApp`
+-   `cd myTizenApp`
+-   `vim package.json` *change "tvip": "192.168.100.1" to your Tv IP*
+-   `yarn bundle` *for release mode (npm run bundle)*
+-   `yarn bundle --dev` *for dev mode, js file not ugly (npm run bundle --dev)*
+-   `yarn package` *packaging tpk for Tizen (npm run package)*
+-   `yarn launch` *launch tpk to Tizen TV , Before launch you [Enable Developer Mode on the TV](#Connect-to-TV) to TV) first* (npm run launch)
 
 ## Connect to TV
+
 Refer to this website, **Enable Developer Mode on the TV**:  
 https://developer.samsung.com/SmartTV/develop/getting-started/using-sdk/tv-device.html
 
 ## Running in emulator
-react-native-tizen-dotnet depend on C++ libraries JSCore and yoga. And emulator has diffrent CPU Arch with TV device. So we provide diffrent C++ libraries(arm & i586).  
-When create react-native-tizen-dotnet project, the arm based libraries provided defaultly in `your-project\Tizen\lib\`.  
-If you want running your app in emulator, you can just replace them with i586 libraries. i586 libraries here:  
+
+> Note: `react-native-tizen-dotnet` depends on the C++ libraries `JSCore` and `yoga`. 
+> The emulator has a diffrent CPU Arch than TV devices.
+> So we provide diffrent C++ libraries (arm & i586).
+
+When creating a new `react-native-tizen-dotnet` project, the ARM base library path is `your-project\Tizen\lib\`.  
+If you want to your app in the emulator, you must replace the ARM library path with the i586 based libraries. 
+
+The paths for `i586` libraries are:  
+
 ```
 Framework/ReactNet/JSCore/libJSCore_i586.so
 Framework/ReactNet/yoga/libyoga_i586.so
